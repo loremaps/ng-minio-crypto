@@ -11,8 +11,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.js",
+              "mergeStrategies": {
+                "externals": "replace"
+              },
+              "replaceDuplicatePlugins": true
+            },
             "outputPath": "dist/ng-minio-crypto",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -60,7 +67,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "ng-minio-crypto:build"
           },
